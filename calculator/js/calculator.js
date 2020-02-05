@@ -6,7 +6,7 @@ $(document).ready(function(){
 		var operation= $('#op').val();
 		if(operation=='Addition'){
 			var total=parseInt(number1)+parseInt(number2);
-			alert(total);
+			$("#total").val(total);
 		}
 		
 	});
