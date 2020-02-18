@@ -91,7 +91,7 @@
           <button id="roll">Roll The Dice</button>
           <div ><img src="d-1.jpg" id="d-result"></div>
         </div>
-        <div id="rule">Help Panda To Reach Home! Roll the dice and get the 6 in 1 turn</div>  
+        <div id="rule">Help Panda To Reach Home! Roll the dice and get the 6 in 3 turn</div>  
       </div>  
     </section> 
 
@@ -100,53 +100,44 @@
            var divBox = [];           
            console.log(divBox);
           for(i=1; i<8; i++){
-             
               divBox.push("<div class='box'></div>");
-              //console.log(i);
           }  
           document.querySelector(".path").innerHTML = divBox.join(""); 
           console.log(divBox.toString());
-              //console.log(divBox);
           var button = document.getElementById("roll");
             count = 0;
           button.onclick = function() {
             count += 1;
-            //console.log(divBox);
           };
 
         var img = document.getElementById("d-result").src;
         var move = 2;
         var sum =0;
-              //console.log(img);
-	    		$('#roll').click(function(){
-		    		var score = Math.floor(Math.random() * 6) + 1;   
-              sum = sum+score; 
-              console.log(sum)            
+	    	  $('#roll').click(function(){
+		      var score = Math.floor(Math.random() * 6) + 1;  
+		      console.log(score);            
               document.getElementById("d-result").src ="d-" + score+ ".jpg";
+              sum = sum+score;
               var pandaPosition = document.getElementById("d-panda-c").style.left = sum * 14.28 +"%";
-              //console.log(img);
               if(count<3){
-                  if(score==6){
-                                  $('#d-result').attr("src", "d-6.jpg");
-                                  $(".pointer").css("right", "0");
-                                  setTimeout(function(){
-                                     // alert('Panda Reached Home');
-                                      //location.reload(true);
-                                  }, 1000);
-                                return true;  
-                                }else{
-                                  setTimeout(function(){
-                                      //alert('Panda Died');
-                                     // location.reload(true);
-                                  }, 1000);
-                                } 
-              }else{
-                    alert("Restart");
+                  if(sum==6){
+                        $('#d-result').attr("src", "d-6.jpg");
+                        $(".pointer").css("right", "0");
+                        setTimeout(function(){
+                        	alert("You won the game");
+                        	location.reload(true);
+                        }, 1000);
+                        return true;  
+                        }else{
+                            setTimeout(function(){
+                            }, 1000);
+                        } 
+              }else if(sum>6 || count<3){
+                  alert("Panda lost the path & has gone too far Try Again");
                   location.reload(true);
               }
-
-			    		 		
-		    	});	
+	 		
+		    });	
 		});    	
     </script> 
   </body>
