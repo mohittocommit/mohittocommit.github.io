@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>  
+  <link rel="stylesheet" href="css/style.css">
+    <title>Ludo</title>
+  <style>
+  		.content{
+  		    display: flex;
+  		    flex-wrap: wrap;
+  		    height: 100vh;
+  		    align-items: center;
+  		}
+  		.path{
+  			display: flex;
+  			flex-wrap: wrap;
+  			justify-content: center;
+			width:100%;
+			height:20vh;
+			margin: 1% 0%
+  		}
+  		.path .box{
+  			border:5px solid black;
+  			width:14.28%;
+  			background-image: url(land.jpg);
+  		}
+  		.path .box:last-child {
+  		    background: green;
+  		    color: #fff;
+  		    display: flex;
+  		    justify-content: center;
+  		    align-items: center;
+  		}
+  		.content .container{
+  			position: relative;
+  		}
+  		.pointer{
+  			position: absolute;
+  			top:-100px;
+  			width: 130px;
+  		}
+  		.pointer img{
+  			width: 130px;
+  		}
+  		button#roll {
+  		    width: 14%;
+  		    height: 70px;
+  		    background-color: #909090;
+  		    color: #fff;
+  		    border: none;
+  		    border-radius: 12px;
+  		}
+
+
+  		@media (min-width: 320px) and (max-width: 480px) {
+  			.content{
+  				padding: 0% 4%;
+  			}
+  			.path {
+  			    height: 6vh;
+  			    margin: 8% 0%;
+  			}
+  			.pointer{
+  				top:-20px;
+  				width: 50px;
+  			}
+	  		.pointer img{
+	  			width: 50px;
+	  		} 
+	  		button#roll {
+	  		    width: 100%;
+	  		}
+		}
+  </style>  
+  </head>
+  <body>
+    <section class="content">
+      <div class="container">
+        <div class="row">
+          <span class="pointer" id="d-panda-c"><img src="panda.png" id="d-panda"></span>
+          <div class="path">            
+          </div> 
+          <button id="roll">Roll The Dice</button>
+          <div ><img src="d-1.jpg" id="d-result"></div>
+        </div>
+        <div id="rule">Help Panda To Reach Home! Roll the dice and get the 6 in 1 turn</div>  
+      </div>  
+    </section> 
+
+    <script>
+    	$(document).ready(function(){ 
+           var divBox = [];           
+           console.log(divBox);
+          for(i=1; i<8; i++){
+             
+              divBox.push("<div class='box'></div>");
+              //console.log(i);
+          }  
+          document.querySelector(".path").innerHTML = divBox.join(""); 
+          console.log(divBox.toString());
+              //console.log(divBox);
+          var button = document.getElementById("roll");
+            count = 0;
+          button.onclick = function() {
+            count += 1;
+            //console.log(divBox);
+          };
+
+        var img = document.getElementById("d-result").src;
+        var move = 2;
+        var sum =0;
+              //console.log(img);
+	    		$('#roll').click(function(){
+		    		var score = Math.floor(Math.random() * 6) + 1;   
+              sum = sum+score; 
+              console.log(sum)            
+              document.getElementById("d-result").src ="d-" + score+ ".jpg";
+              var pandaPosition = document.getElementById("d-panda-c").style.left = sum * 14.28 +"%";
+              //console.log(img);
+              if(count<3){
+                  if(score==6){
+                                  $('#d-result').attr("src", "d-6.jpg");
+                                  $(".pointer").css("right", "0");
+                                  setTimeout(function(){
+                                     // alert('Panda Reached Home');
+                                      //location.reload(true);
+                                  }, 1000);
+                                return true;  
+                                }else{
+                                  setTimeout(function(){
+                                      //alert('Panda Died');
+                                     // location.reload(true);
+                                  }, 1000);
+                                } 
+              }else{
+                    alert("Restart");
+                  location.reload(true);
+              }
+
+			    		 		
+		    	});	
+		});    	
+    </script> 
+  </body>
+</html>

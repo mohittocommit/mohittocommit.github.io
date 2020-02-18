@@ -95,7 +95,11 @@
           	<div class="box"></div>
           	<div class="box">Goal</div>
           </div> 
-          <button id="roll">Roll The Dice</button>
+          <audio id="myAudio">
+            <source src="DICEUP.wav" type="audio/ogg">
+            <source src="DICEUP.wav" type="audio/mpeg">
+          </audio>
+          <button id="roll" onclick="playAudio()">Roll The Dice</button>
           <div ><img src="" id="d-result"></div>
         </div>
         <div id="rule">Help Panda To Reach Home! Roll the dice and get the 6 in 1 turn</div>  
@@ -105,6 +109,10 @@
     <script>
     	$(document).ready(function(){
 	    		$('#roll').click(function(){
+	    			var x = document.getElementById("myAudio");
+	    			function playAudio() { 
+	    			  x.play(); 
+	    			} 
 		    		var score = Math.floor(Math.random() * 7);	
 		    		console.log(score);
 		    		//$("#result").html(score);
